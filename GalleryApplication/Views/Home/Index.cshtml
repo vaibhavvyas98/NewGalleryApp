@@ -1,0 +1,105 @@
+﻿<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $.ajax({
+            type: 'GET',
+            url: "https://localhost:44392/api/FileUpload/GetPath",
+            success: function (data) {
+                $("#image1").attr('src', "data");
+
+            }
+        });
+
+        $('#btnUploadFile').on('click', function () {
+
+            var data = new FormData();
+
+            var files = $("#fileUpload").get(0).files;
+
+            if (files.length > 0) {
+                data.append("UploadedImage", files[0]);
+            }
+
+
+            var ajaxRequest = $.ajax({
+                type: "POST",
+                url: "https://localhost:44392/api/FileUpload/UploadFile",
+                contentType: false,
+                processData: false,
+                data: data
+            });
+
+
+        });
+    });
+</script>
+
+<div>
+    <table>
+        <tr>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <img id='image1' class="card-img-top" src='~/imgs/one.jpg' height=100% width=100%>
+                </div>
+            </td>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <img id='image1' class="card-img-top" src='~/imgs/one.jpg' height=100% width=100%>
+                </div>
+            </td>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <img id='image1' class="card-img-top" src='~/imgs/one.jpg' height=100% width=100%>
+                </div>
+            </td>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <img id='image1' class="card-img-top" src='~/imgs/one.jpg' height=100% width=100%>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <img id='image1' class="card-img-top" src='~/imgs/one.jpg' height=100% width=100%>
+                </div>
+            </td>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <img id='image1' class="card-img-top" src='~/imgs/one.jpg' height=100% width=100%>
+                </div>
+            </td>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <img id='image1' class="card-img-top" src='~/imgs/one.jpg' height=100% width=100%>
+                </div>
+            </td>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <img id='image1' class="card-img-top" src='~/imgs/one.jpg' height=100% width=100%>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+
+<div class="row">
+    <div>
+        <label for="fileUpload">Select File to Upload: <input id="fileUpload" type="file"></label>
+
+        <input id="btnUploadFile" type="button" value="Upload File" />
+    </div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" />
