@@ -8,23 +8,24 @@ using System.Web.Http.Cors;
 
 namespace WebApi.Controllers
 {
-    [EnableCors(origins: "http://localhost:44315/Home/Index.html", headers: "*", methods: "*")]
+
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class FileUploadController : Controller
     {
         [HttpPost]
         public void UploadFile()
         {
-            if (HttpContext.Current.Request.Files.AllKeys.Any())
+            if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
             {
                 // Get the uploaded image from the Files collection
-                var httpPostedFile = HttpContext.Current.Request.Files["UploadedImage"];
+                var httpPostedFile = System.Web.HttpContext.Current.Request.Files["UploadedImage"];
 
                 if (httpPostedFile != null)
                 {
                     // Validate the uploaded image(optional)
 
                     // Get the complete file path
-                    var fileSavePath = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), httpPostedFile.FileName);
+                    var fileSavePath = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/UploadedFiles"), httpPostedFile.FileName);
 
                     // Save the uploaded file to "UploadedFiles" folder
                     httpPostedFile.SaveAs(fileSavePath);
@@ -36,7 +37,7 @@ namespace WebApi.Controllers
 
         public string GetPath()
         {
-            string path = File.ReadAllText("Paths.txt");
+            string path = System.IO.File.ReadAllText("Paths.txt");
             return path;
         }
     }
